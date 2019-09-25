@@ -19,3 +19,4 @@ def search():
     data = {'acao': 'track', 'objetos': tracking_code, 'btnPesq': 'Buscar'}
     package_search = requests.post(mail_url, data=data)
     search_result = parser.parse(package_search.content, tracking_code)
+    return render_template("tracking.html", tracking=search_result)
