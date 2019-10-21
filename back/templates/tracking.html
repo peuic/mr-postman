@@ -1,3 +1,42 @@
+<!doctype html>
 <html>
-    <p>{{tracking}}</p>
+	<body>
+		<header class="sticky-top">
+		<nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow-sm">
+				<a class="navbar-brand" href="/">Mr. Postman</a>
+		
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+																												aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+				</button>
+		</nav>
+		</header>
+	</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+                                                                                                           crossorigin="anonymous">
+    <link href="/static/styles.css" rel="stylesheet">
+    <div class="container">
+        <p><b>{{tracking['tracking code']}}</b></p>
+        <table class="table">
+            <tr class="table-active">
+                <th scope="col">Date/Time</th>
+                <th scope="col">City</th>
+                <th scope="col">Activity</th>
+            </tr>
+            {% for activity in tracking['activity'] %}
+            <tr>
+                    <td><b>{{activity['date']}}</b></td>
+                    <td><b>{{activity['city']}}</b></td>
+                    <td>{{activity['text']}}</td>
+            </tr>
+            {% endfor %}
+                    
+        </table>
+        <form method="GET" action='/'>
+        <button type='submit'>Back</button></form> 
+    </div>
 </html>
