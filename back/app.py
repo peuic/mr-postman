@@ -20,3 +20,6 @@ def search():
     package_search = requests.post(mail_url, data=data)
     search_result = parser.parse(package_search.content, tracking_code)
     return render_template("tracking.html", tracking=search_result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
