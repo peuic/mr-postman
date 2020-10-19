@@ -39,7 +39,6 @@ def get_package_activity(data):
     activity = []
     table = data.find("table", class_="listEvent sro")
     table_lines = table.find_all("tr")
-    breakpoint()
 
     for line in table_lines:
         tracking_date = ""
