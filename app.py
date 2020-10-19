@@ -37,21 +37,22 @@ def parse(html, tracking):
 
 def get_package_activity(data):
     activity = []
-    table = data.find("table", class_="listEvent sro")
-    table_lines = table.find_all("tr")
+    tables = data.find_all("table", class_="listEvent sro")
 
-    for line in table_lines:
-        tracking_date = ""
-        tracking_city = ""
-        date = re.compile(r"\d{2}/\d{2}/\d{2,4}\s*?\d{1,2}:\d{2}")
-        line_data = line.find_all("td")
-        tracking_date_raw = clean_text(line_data[0].text)
-        tracking_activity = clean_text(line_data[1].text)
-        tracking_date_search = re.search(date, tracking_date_raw)
-        if tracking_date_search:
-            tracking_date = tracking_date_search.group()
-            tracking_city = re.sub(date, "", tracking_date_raw).strip()
-        activity.append({"text":tracking_activity, "date":tracking_date, "city": tracking_city})
+    for table in tables:
+        lines = table.find_all("tr")
+        for line in lines:
+            tracking_date = ""
+            tracking_city = ""
+            date = re.compile(r"\d{2}/\d{2}/\d{2,4}\s*?\d{1,2}:\d{2}")
+            line_data = line.find_all("td")
+            tracking_date_raw = clean_text(line_data[0].text)
+            tracking_activity = clean_text(line_data[1].text)
+            tracking_date_search = re.search(date, tracking_date_raw)
+            if tracking_date_search:
+                tracking_date = tracking_date_search.group()
+                tracking_city = re.sub(date, "", tracking_date_raw).strip()
+            activity.append({"text":tracking_activity, "date":tracking_date, "city": tracking_city})
 
     return activity
 
